@@ -10,7 +10,15 @@ runs:
   using: "composite"
 
   steps:
+    - name: Cache Copilot CLI
+      id: cache-copilot
+      uses: actions/cache@v3
+      with:
+        path: /usr/local/bin/copilot
+        key: ${{ runner.os }}-copilot-${{ inputs.version }}
+
     - name: Install Copilot CLI
+      if: steps.cache-copilot.outputs.cache-hit != 'true'
       shell: bash
       run: |
         curl -Lo /usr/local/bin/copilot "https://github.com/aws/copilot-cli/releases/download/${{ inputs.version }}/copilot-linux"
