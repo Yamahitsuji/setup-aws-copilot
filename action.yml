@@ -1,0 +1,20 @@
+name: "Setup AWS Copilot CLI"
+
+inputs:
+  version:
+    description: "Copilot CLI version"
+    required: false
+    default: "latest"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Install Copilot CLI
+      shell: bash
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/bin
+        curl -Lo copilot "https://github.com/aws/copilot-cli/releases/download/${{ inputs.version }}/copilot-linux"
+        chmod +x copilot
+        mv copilot $GITHUB_WORKSPACE/bin/copilot
+        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
