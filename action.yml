@@ -13,8 +13,5 @@ runs:
     - name: Install Copilot CLI
       shell: bash
       run: |
-        mkdir -p $GITHUB_WORKSPACE/bin
-        curl -Lo copilot "https://github.com/aws/copilot-cli/releases/download/${{ inputs.version }}/copilot-linux"
-        chmod +x copilot
-        mv copilot $GITHUB_WORKSPACE/bin/copilot
-        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+        curl -Lo /usr/local/bin/copilot "https://github.com/aws/copilot-cli/releases/download/${{ inputs.version }}/copilot-linux"
+        chmod +x /usr/local/bin/copilot
